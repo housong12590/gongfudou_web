@@ -69,7 +69,7 @@ def total_count():
     ret = SQLHelper.fetch_one('SELECT count(*) AS count FROM users')
     total_count = ret.get('count')
     users = SQLHelper.fetch_all(
-        "SELECT id user_id,nickname,avatar,lng `long`,lat,DATE_FORMAT(created_at,'%%Y-%%m-%%d %%H:%%m:%%s') login_time FROM users WHERE to_days(created_at) = to_days(now()) AND `lng` IS NOT NULL ORDER BY id DESC LIMIT 50")
+        "SELECT id user_id,nickname,avatar,lng lat,lat `long`,DATE_FORMAT(created_at,'%%Y-%%m-%%d %%H:%%m:%%s') login_time FROM users WHERE to_days(created_at) = to_days(now()) AND `lng` IS NOT NULL ORDER BY id DESC LIMIT 50")
     today_count = len(users)
     ret = SQLHelper.fetch_one(
         "SELECT COUNT(*) count FROM users WHERE DATE_FORMAT( created_at,'%%Y-%%m-%%d') = DATE_FORMAT(CURDATE()-1,'%%Y-%%m-%%d');")
