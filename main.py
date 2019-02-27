@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from db.db_helper import SQLHelper
+from flask_cors import *
 
 """
 全村最靓的崽:
@@ -60,7 +61,7 @@ http://proxy.jiankanghao.net:50058/user
 """
 
 app = Flask(__name__)
-
+CORS(app, supports_credentials=True)
 
 @app.route('/total_count')
 def total_count():
