@@ -68,7 +68,7 @@ def total_count():
     ret = SQLHelper.fetch_one('SELECT count(*) AS count FROM users')
     total_count = ret.get('count')
     users = SQLHelper.fetch_all(
-        'SELECT id user_id,nickname,avatar,lng `long`,lat,created_at login_time FROM users WHERE to_days(created_at) = to_days(now()) AND `lng` IS NOT NULL')
+        'SELECT id user_id,nickname,avatar,lng `long`,lat,created_at login_time FROM users WHERE to_days(created_at) = to_days(now()) AND `lng` IS NOT NULL LIMIT 50')
     today_count = len(users)
     ret = SQLHelper.fetch_one(
         'SELECT count(id) AS count FROM users WHERE TO_DAYS( NOW( ) ) - TO_DAYS( created_at) <= 1')
