@@ -63,15 +63,16 @@ http://proxy.jiankanghao.net:50058/user
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
+
 @app.route('/total_count')
 def total_count():
     ret = SQLHelper.fetch_one('SELECT count(*) AS count FROM users')
     total_count = ret.get('count')
     users = SQLHelper.fetch_all(
-        'SELECT id user_id,nickname,avatar,lng `long`,lat,created_at login_time FROM users WHERE to_days(created_at) = to_days(now()) AND `lng` IS NOT NULL LIMIT 50')
+        'SELECT id user_id,nickname,avatar,lng `long`,lat,created_at login_time FROM users WHERE to_days(created_at) = to_days(now()) AND `lng` IS NOT NULL ORDER BY id DESC LIMIT 50')
     today_count = len(users)
     ret = SQLHelper.fetch_one(
-        'SELECT count(id) AS count FROM users WHERE TO_DAYS( NOW( ) ) - TO_DAYS( created_at) <= 1')
+        "SELECT COUNT(*) FROM users WHERE DATE_FORMAT( created_at,'%Y-%m-%d') = DATE_FORMAT(CURDATE()-1,'%Y-%m-%d');")
     yesterday_count = ret.get('count')
     data = {'today_count': today_count, 'total_count': total_count,
             'yesterday_count': yesterday_count, 'users': users}
