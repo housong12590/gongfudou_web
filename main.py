@@ -83,7 +83,7 @@ def total_count():
 @app.route('/user')
 def user():
     interval = request.args.get('interval', 3)
-    sql = "SELECT id user_id,nickname,avatar,lng AS `long`,lat,DATE_FORMAT(created_at,'%%Y-%%m-%%d %%H:%%m:%%s') login_time FROM users WHERE created_at > DATE_sub(NOW(), INTERVAL {} SECOND) AND lng IS NOT NULL".format(
+    sql = "SELECT id user_id,nickname,avatar,lng lat,lat `long`,DATE_FORMAT(created_at,'%%Y-%%m-%%d %%H:%%m:%%s') login_time FROM users WHERE created_at > DATE_sub(NOW(), INTERVAL {} SECOND) AND lng IS NOT NULL".format(
         interval)
     ret_data = SQLHelper.fetch_all(sql)
     return make_resp(ret_data)
