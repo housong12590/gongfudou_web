@@ -91,7 +91,8 @@ def user():
 
 @app.route('/all')
 def all():
-    sql = 'SELECT any_value (lng) AS lat,any_value (lat) AS lng,count(lat) AS count FROM users WHERE lng IS NOT NULL GROUP BY city'
+    # sql = 'SELECT any_value (lng) AS lat,any_value (lat) AS lng,count(lat) AS count FROM users WHERE lng IS NOT NULL GROUP BY city'
+    sql = 'SELECT lng ,lat AS count FROM users WHERE lng IS NOT NULL '
     ret_data = SQLHelper.fetch_all(sql)
     return make_resp(ret_data)
 
