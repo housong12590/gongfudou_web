@@ -94,8 +94,8 @@ def all():
     # sql = 'SELECT any_value (lng) AS lat,any_value (lat) AS lng,count(lat) AS count FROM users WHERE lng IS NOT NULL GROUP BY city'
     sql = """
     SELECT
-        SUBSTR(lng, 1, 8),
-        SUBSTR(lat, 1, 7),
+        SUBSTR(lng, 1, 8) lng,
+        SUBSTR(lat, 1, 7) lat,
         city
     FROM
         users
